@@ -12,9 +12,12 @@ application = Flask(__name__)
 
 @application.route("/")
 def hello():
+  with open("/mnt/hello_log.txt") as f:
+    contents = f.read()
     
-    return "Hello World! Greetings from "+socket.gethostname()+"\n"
-
+  f.close()
+  
+  return contents
 
 if __name__ == "__main__":
     application.run()
