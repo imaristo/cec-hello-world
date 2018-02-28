@@ -12,10 +12,16 @@ application = Flask(__name__)
 
 @application.route("/")
 def hello():
-  with open("/mnt/hello_log.txt") as f:
-    contents = f.read()
+  now = datetime.datetime.now()                                                                                                                      
+                                                                                                                                                       
+  f= open("/mnt/hello_log.txt","a+")                                                                                                                 
+  f.write ("%r,%r\n" % (socket.gethostname(), now.strftime("%Y-%m-%d %H:%M:%S")))                                                                    
+  f.close()  
+  
+  with open("/mnt/hello_log.txt") as r:
+    contents = r.read()
     
-  f.close()
+  r.close()
   
   return contents
 
